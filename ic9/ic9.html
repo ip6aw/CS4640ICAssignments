@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+   <title>In-class 9: AngularJS </title>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+ 
+    Write an AngularJS program that creates a data entry form to accept six project scores. CHECK     <br /> 
+    All scores are out of 100 points, except the first (which is out of 30) and the fifth (which is out of 50). CHECK     <br /> 
+    The program allows a user to specify whether the lowest project score will be dropped. Two Options. One for lowest dropped and one for not.      <br /> 
+    The program then computes and displays the highest average score for the projects. 
+    <br /> 
+          <br /> 
+</head>
+<body ng-app="myApp">
+
+   <div ng-controller="CalcController">
+      Score for project 1: <input type="number" ng-model="project1" /> <br/>
+      Score for project 2: <input type="number" ng-model="project2" /> <br/>
+      Score for project 3: <input type="number" ng-model="project3" /> <br/>
+      Score for project 4: <input type="number" ng-model="project4" /> <br/>
+      Score for project 5: <input type="number" ng-model="project5" /> <br/>
+      Score for project 6: <input type="number" ng-model="project6" /> <br/>
+    <br /> 
+          <br /> 
+
+       
+      Total of all projects: {{project1 + project2 + project3 + project4 + project5 + project6}} 
+          <br /> 
+          <br /> 
+      Total = {{sum}}
+          <br />      
+          <br /> 
+      Lowest Score to Drop = {{lowest}}
+          <br/>
+          <br /> 
+       
+      <input type="button" ng-click="compute('drop')" 
+         value="Grade with lowest grade dropped " />
+
+       
+      <input type="button" ng-click="compute('nodrop')" 
+         value="Grade without lowest grade dropped " /> <br />
+       
+      <br />
+      Average = {{avg}} <br />
+    
+   </div>
+   
+   <script>   
+      var ngApp = angular.module('myApp', []);   
+
+      ngApp.controller('CalcController', function($scope) {  
+         $scope.compute = function(flag) {
+            $scope.score1 = ($scope.project1 * 100)/30;
+            $scope.score2 = $scope.project2;
+            $scope.score3 = $scope.project3;
+            $scope.score4 = $scope.project4;
+            $scope.score5 = ($scope.project5 * 100)/50;
+            $scope.score6 = $scope.project6;
+            
+            $scope.sum = $scope.score1 + $scope.score2 + $scope.score3 + $scope.score4 + $scope.score5 + $scope.score6;
+            $scope.lowest = Math.min($scope.score1, $scope.score2, $scope.score3, $scope.score4, $scope.score5, $scope.score6);
+            
+        
+         };
+         
+         
+      }); 
+   </script>
+   
+   
+</body>
+</html>
